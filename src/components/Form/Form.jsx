@@ -6,26 +6,33 @@ import Input from '../Input/Input';
 export default function Form({ handleSubmit }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const [id, setId] = useState('');
 
   const handleSetInfo = e => {
     const { name, value } = e.target;
-    this.setState({ [name]: value });
-    //   console.log(this.state);
+    switch (name) {
+      case 'name':
+        setName(value);
+        break;
+
+      case 'number':
+        setNumber(value);
+        break;
+
+      default:
+        return;
+    }
   };
 
   const handleAddContact = e => {
     e.preventDefault();
 
-    handleSubmit(name, number, id);
-    // console.log('Стейт формы>', this.state);
+    handleSubmit({ name, number });
     reset();
   };
 
   const reset = () => {
     setName('');
     setNumber('');
-    setId('');
   };
 
   return (
